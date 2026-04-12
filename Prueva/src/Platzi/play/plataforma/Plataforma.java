@@ -1,6 +1,7 @@
 package Platzi.play.plataforma;
 import Platzi.play.contenido.Genero;
 import Platzi.play.contenido.Pelicula;
+import Platzi.play.contenido.ResumenContenido;
 import Platzi.play.excepcion.PeliculaExistenteException;
 
 import java.util.ArrayList;
@@ -16,12 +17,14 @@ public class Plataforma {
         this.contenido = new ArrayList<>();
     }
 
-    public void agregar(Pelicula elemento){
-        //this.contenido.add(elemento);
+    public void agregar(Pelicula elemento) {
         Pelicula contenido = this.buscarPorTitulo(elemento.getTitulo());
-        if (contenido != null){
+
+        if (contenido != null) {
             throw new PeliculaExistenteException(elemento.getTitulo());
         }
+
+        this.contenido.add(elemento);
     }
 
     public void eliminar(Pelicula elemento){
@@ -54,7 +57,12 @@ public class Plataforma {
                 .limit(cantidad)
                 .toList();
     }
+    public List<ResumenContenido> getResumenes(){
+        return contenido.stream()
+                .map(conte -> new ResumenContenido(conte.getTitulo(), conte.getDuracion(), conte.getGenero()))
+                .toList();
 
+    }
 
 
 

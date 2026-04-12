@@ -2,6 +2,7 @@ package Platzi.play;
 
 import Platzi.play.contenido.Genero;
 import Platzi.play.contenido.Pelicula;
+import Platzi.play.contenido.ResumenContenido;
 import Platzi.play.excepcion.PeliculaExistenteException;
 import Platzi.play.plataforma.Plataforma;
 import Platzi.play.plataforma.Usuario;
@@ -46,8 +47,8 @@ public class Main {
                     4. buscar por genero
                     5. eliminar
                     6. ver populares
-                    7. salir
-                       ingrese: """);
+                    7. salir  
+                    """);
 
             switch (opcionElegida) {
                 case AGREGAR -> {
@@ -65,9 +66,12 @@ public class Main {
 
                 }
                 case MOSTRAR_TODO -> {
-                    //plataforma.mostrarTitulos();
-                    List<String> titulos = plataforma.mostrarTitulos();
-                    titulos.forEach(System.out::println);
+//                    plataforma.mostrarTitulos();
+//                    List<String> titulos = plataforma.mostrarTitulos();
+//                    titulos.forEach(System.out::println);
+                   List<ResumenContenido> contenidosResumidos = plataforma.getResumenes();
+                   contenidosResumidos.forEach(resumen -> System.out.println(resumen.titulo()));
+
                 }
                 case BUSCAR_POR_TITULOS -> {
                     String nombreBuscado = ScannerUtils.capturarTexto("buscar el nombre de la pelicula: ");

@@ -1,4 +1,7 @@
 package Platzi.play.contenido;
 
-public record ResumenContenido() {
+public record ResumenContenido(String titulo,
+                               int duracion,
+                               Genero genero) {
+
 }
