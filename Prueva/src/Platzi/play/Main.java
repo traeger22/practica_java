@@ -15,13 +15,14 @@ import java.util.List;
 public class Main {
     public static final String NOMBRE_PLATAFORMA = "PLATZI PLAY";
     public static final String VERSION = "1.0.1";
-    public static final int SALIR = 7;
+    public static final int SALIR = 8;
     public static final int AGREGAR = 1;
     public static final int MOSTRAR_TODO = 2;
     public static final int BUSCAR_POR_TITULOS = 3;
     public static final int BUSCAR_POR_GENERO = 4;
     public static final int VER_POPULARES = 6;
     public static final int ELIMINAR = 5;
+    public static final int REPRODUCIR = 7;
 
     public static void main(String[] args) {
 
@@ -47,7 +48,8 @@ public class Main {
                     4. buscar por genero
                     5. eliminar
                     6. ver populares
-                    7. salir  
+                    7. Reproducir
+                    8. salir  
                     """);
 
             switch (opcionElegida) {
@@ -70,7 +72,7 @@ public class Main {
 //                    List<String> titulos = plataforma.mostrarTitulos();
 //                    titulos.forEach(System.out::println);
                    List<ResumenContenido> contenidosResumidos = plataforma.getResumenes();
-                   contenidosResumidos.forEach(resumen -> System.out.println(resumen.titulo()));
+                   contenidosResumidos.forEach(resumen -> System.out.println(resumen.toString()));
 
                 }
                 case BUSCAR_POR_TITULOS -> {
@@ -95,6 +97,17 @@ public class Main {
 
                     List<Pelicula> contenidosPopulares = plataforma.getPopulares(cantidad);
                     contenidosPopulares.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica() + "\n"));
+
+                }
+                case REPRODUCIR ->{
+                    String nombre  = ScannerUtils.capturarTexto("nombre de la pelicula a reproducir: ");
+                    Pelicula contenido = plataforma.buscarPorTitulo(nombre);
+
+                    if (contenido != null){
+                        plataforma.reproducir(contenido);
+                    }else {
+                        System.out.println(nombre + "no existe dentro de la plataforma");
+                    }
 
                 }
                 case ELIMINAR -> {
